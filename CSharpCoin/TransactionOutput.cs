@@ -16,7 +16,7 @@ namespace CSharpCoin
             this.reciepient = reciepient;
             this.value = value;
             this.parentTransactionId = parentTransactionId;
-            this.id = StringUtil.EncryptSHA256(reciepient + Convert.ToString(value) + parentTransactionId);
+            this.id = StringUtil.ApplySHA256(reciepient + Convert.ToString(value) + parentTransactionId);
         }
 
 

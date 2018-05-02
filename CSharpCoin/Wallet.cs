@@ -43,6 +43,9 @@ namespace CSharpCoin
             double total = 0;
             foreach(KeyValuePair<String, TransactionOutput> item in Program.UTXOs)
             {
+                // EM CONSTRUÇÃO (CÓDIGO QUE PUXA INFORMAÇÕES DOS OUTPUTS DO BANCO DE DADOS)
+
+
                 TransactionOutput UTXO = item.Value;
                 if (UTXO.isMine(keyParameters)) // Se a saída pertence a mim ( se o dinheiro pertence a mim )
                 {

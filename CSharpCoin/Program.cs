@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Diagnostics;
+using CSharpCoin.db;
 
 namespace CSharpCoin
 {
@@ -21,13 +22,30 @@ namespace CSharpCoin
 
         static void Main(string[] args)
         {
+            // --- TESTE BANCO DE DADOS ---
+
+            CoinDatabaseDAO db = new CoinDatabaseDAO();
+            db.WriteToBlockchainSQL("asasa", "asasaasasasa");
+            db.WriteToBlockchainSQL("asasa", "asasaasasasa");
+            db.WriteToBlockchainSQL("asasa", "asasaasasasa");
+
+            db.WriteToWalletSQL("batata", "hamburguer", "100.00");
+            String[] test = db.ReadFromWalletSQL(1);
+            Debug.WriteLine("TESTE CARTEIRA SQL");
+            Debug.WriteLine(test[0] + ", " + test[1] + ", " + test[2]);
+
+            // --------------------------------------
+
+
+
             // --- INICIALIZAÇÃO DO WINDOWS FORMS ---
 
             Application.EnableVisualStyles();
             Application.Run(new AppMainWindow());
-            
+
             // --------------------------------------
 
+           
 
             // --- INICIALIZAÇÃO DO CONSOLE ---
 

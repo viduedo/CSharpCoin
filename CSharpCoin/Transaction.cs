@@ -34,7 +34,7 @@ namespace CSharpCoin
         private String CalculateHash()
         {
             sequence++; // Aumenta a sequência para evitar 2 transações idênticas utilizando o mesmo HASH
-            return StringUtil.EncryptSHA256(
+            return StringUtil.ApplySHA256(
                             StringUtil.GetStringFromPublicKey(sender) +
                             StringUtil.GetStringFromPublicKey(reciepient) +
                             Convert.ToString(value) + sequence

@@ -1,0 +1,9 @@
+﻿// Exemplo de leitura de vários dados em um DB
+
+CoinDatabaseDAO db = new CoinDatabaseDAO();
+
+for(int i=1; i<= db.GetRowCountBlockchainSQL(); i++)
+            {
+                String[] recipiente = db.ReadFromBlockchainSQL(i);
+                Debug.WriteLine(recipiente[0] + ": " + recipiente[1] + ", " + recipiente[2]);
+            }

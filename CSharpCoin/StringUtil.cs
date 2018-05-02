@@ -11,7 +11,7 @@ namespace CSharpCoin
 {
     class StringUtil
     {
-        public static String EncryptSHA256(String input)
+        public static String ApplySHA256(String input)
         {
             try
             {
@@ -30,6 +30,49 @@ namespace CSharpCoin
                 return null;
             }
         }
+
+        // Utilizado para ENCRIPTAR os dados que vão até um banco de dados
+        public static String EncryptRSA(String input, RSAParameters keyParameters)
+        {
+            try
+            {
+                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+                rsa.ImportParameters(keyParameters); // Importa as chaves (Keys) na nova instância do RSACryptoServiceProvider
+
+                byte[] encryptedData = rsa.Encrypt(Encoding.UTF8.GetBytes(input), true); // Encripta os dados, transformando-os em um Array de bytes
+                String base64Encrypted = Convert.ToBase64String(encryptedData); // Converte os dados encriptados em String
+
+                return base64Encrypted;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        // Utilizado para DECRIPTAR os dados que vem de um banco de dados
+        public static String DecryptRSA(String input, RSAParameters keyParameters)
+        {
+            try
+            {
+                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+                rsa.ImportParameters(keyParameters); // Importa as chaves (Keys) na nova instância do RSACryptoServiceProvider
+
+                byte[] encryptedData = Convert.FromBase64String(input); // Converte os dados encriptados de String para Bytes
+                byte[] decryptedBytes = rsa.Decrypt(encryptedData, true); // Decripta os dados
+                String decryptedData = Encoding.UTF8.GetString(decryptedBytes); // Converte os dados decriptados em String
+
+                return decryptedData;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        
 
         // Aplica uma Assinatura Digital através do algoritmo RSA
         public static byte[] ApplyRSASig(RSAParameters keyParameters, String input)
@@ -113,7 +156,7 @@ namespace CSharpCoin
                 treeLayer = new List<String>();
                 for(int i=1; i<previousTreeLayer.Count; i++)
                 {
-                    treeLayer.Add(EncryptSHA256(previousTreeLayer[i - 1] + previousTreeLayer[i]));
+                    treeLayer.Add(ApplySHA256(previousTreeLayer[i - 1] + previousTreeLayer[i]));
                 }
                 count = treeLayer.Count();
                 previousTreeLayer = treeLayer;

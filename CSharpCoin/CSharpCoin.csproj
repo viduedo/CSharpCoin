@@ -73,12 +73,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoinDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="db\CoinDatabaseDAO.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="windows\debug\ControlWriter.cs" />
     <Compile Include="windows\debug\DebugMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +209,7 @@
     <Folder Include="images\network\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Códigos Utilitários.txt" />
     <Content Include="db\CoinDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -28,7 +28,7 @@ namespace CSharpCoin
         // Calcula uma nova HASH baseada no conteúdo dos Blocos
         public String CalculateHash() // Calcula uma HASH
         {
-            String calculatedHash = StringUtil.EncryptSHA256(
+            String calculatedHash = StringUtil.ApplySHA256(
                             previousHash +
                             Convert.ToString(timeStamp) +
                             Convert.ToString(nonce) +
