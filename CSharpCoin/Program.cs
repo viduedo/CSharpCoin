@@ -25,44 +25,68 @@ namespace CSharpCoin
             // --- TESTE BANCO DE DADOS ---
 
             CoinDatabaseDAO db = new CoinDatabaseDAO();
-            db.WriteToBlockchainSQL("asasa", "asasaasasasa");
-            db.WriteToBlockchainSQL("asasa", "asasaasasasa");
-            db.WriteToBlockchainSQL("asasa", "asasaasasasa");
 
-            db.WriteToWalletSQL("batata", "hamburguer", "100.00");
+            /*db.WriteToWalletSQL("batata", "hamburguer", "100.00");
+            db.WriteToWalletSQL("batata", "hamburguer", "200.00");
+            db.WriteToWalletSQL("batata", "hamburguer", "300.00");
+            db.WriteToWalletSQL("batata", "hamburguer", "800.00");*/
+            /*Debug.WriteLine(db.GetRowCountSQL("C_WALLET"));
             String[] test = db.ReadFromWalletSQL(1);
             Debug.WriteLine("TESTE CARTEIRA SQL");
-            Debug.WriteLine(test[0] + ", " + test[1] + ", " + test[2]);
+            Debug.WriteLine(test[0] + ", " + test[1] + ", " + test[2] + ", " + test[3]);
+
+            Debug.WriteLine(db.DataExistsWalletSQL());*/
+
+            /*// Lê os dados do banco de dados e preenche o UTXOs
+            if(db.GetRowCountSQL("C_UTXOS") > 0)
+            {
+                for(int i = 0; i < db.GetRowCountSQL("C_UTXOS"); i++)
+                {
+                    String[] recipiente = db.ReadFromUTXOSQL(i);
+                    TransactionOutput output = new TransactionOutput(recipiente[2], Convert.ToDouble(recipiente[3]), recipiente[4]);
+                    UTXOs.Add(recipiente[1] + "A", output);
+                }
+            }*/
+                
+
 
             // --------------------------------------
 
 
-
-            // --- INICIALIZAÇÃO DO WINDOWS FORMS ---
-
-            Application.EnableVisualStyles();
-            Application.Run(new AppMainWindow());
-
-            // --------------------------------------
-
-           
-
-            // --- INICIALIZAÇÃO DO CONSOLE ---
+            // --- INICIALIZAÇÃO DO CONSOLE DEBUG ---
 
             // Instancia as novas carteiras
-            walletA = new Wallet();
-            walletB = new Wallet();
 
             Wallet coinbase = new Wallet();
+
+            walletA = new Wallet();
+            db.WriteToWalletSQL(StringUtil.GetStringFromPublicKey(walletA.keyParameters), StringUtil.GetStringFromPrivateKey(walletA.keyParameters), walletA.GetBalance());
+            walletB = new Wallet();
+            db.WriteToWalletSQL(StringUtil.GetStringFromPublicKey(walletB.keyParameters), StringUtil.GetStringFromPrivateKey(walletB.keyParameters), walletB.GetBalance());
+
+            
 
             // Cria a transação GENESIS, na qual envia 100 CSharpCoins para a walletA:
             genesisTransaction = new Transaction(coinbase.keyParameters, walletA.keyParameters, 100, null);
             genesisTransaction.GenerateSignature(coinbase.keyParameters); // Assina manualmente a transação GENESIS
             genesisTransaction.transactionId = "0"; // Seta manualmente o ID de transação
             genesisTransaction.outputs.Add(new TransactionOutput(StringUtil.GetStringFromPublicKey(genesisTransaction.reciepient), genesisTransaction.value, genesisTransaction.transactionId)); // Manualmente adiciona as saídas da transação
-            UTXOs.Add(genesisTransaction.outputs[0].id, genesisTransaction.outputs[0]); // É importante armazenar a nossa primeira transação na lista de UTXOs
+            //UTXOs.Add(genesisTransaction.outputs[0].id, genesisTransaction.outputs[0]); // SUBSTITUÍDO PELO BANCO DE DADOS
+            db.WriteToUTXOSQL(genesisTransaction.outputs[0].id, genesisTransaction.outputs[0].reciepient, genesisTransaction.outputs[0].value, genesisTransaction.outputs[0].parentTransactionId); // É importante armazenar a nossa primeira transação na lista de UTXOs
+            
+            // Lê os dados do banco de dados e preenche o UTXOs
+            if (db.GetRowCountSQL("C_UTXOS") > 0)
+            {
+                for (int i = 1; i <= db.GetRowCountSQL("C_UTXOS"); i++)
+                {
+                    String[] recipiente = db.ReadFromUTXOSQL(i);
+                    TransactionOutput output = new TransactionOutput(recipiente[2], Convert.ToDouble(recipiente[3]), recipiente[4]);
+                    UTXOs.Add(recipiente[1], output);
+                }
+            }
+            
 
-            Debug.WriteLine("\n-------------------------------------------------------------------------------\n");
+           Debug.WriteLine("\n-------------------------------------------------------------------------------\n");
 
             Debug.WriteLine("#Criando e minerando o Bloco GENESIS...");
             Block genesis = new Block("0");
@@ -95,8 +119,15 @@ namespace CSharpCoin
             Debug.WriteLine("O saldo da carteiraB é: " + walletB.GetBalance());
 
             IsChainValid();
-
+            
             Debug.WriteLine("\n-------------------------------------------------------------------------------\n");
+
+            // --- INICIALIZAÇÃO DO WINDOWS FORMS ---
+
+            Application.EnableVisualStyles();
+            Application.Run(new AppMainWindow());
+
+            // --------------------------------------
         }
 
 
@@ -113,7 +144,7 @@ namespace CSharpCoin
             Block currentBlock;
             Block previousBlock;
 
-            Dictionary<String, TransactionOutput> tempUTXOs = new Dictionary<string, TransactionOutput>(); // Uma lista de trabalho temporário de transações não gastas em um determinado estado de um bloco.
+            Dictionary<String, TransactionOutput> tempUTXOs = new Dictionary<String, TransactionOutput>(); // Uma lista de trabalho temporário de transações não gastas em um determinado estado de um bloco.
             tempUTXOs.Add(genesisTransaction.outputs[0].id, genesisTransaction.outputs[0]);
 
             // Loop pelo BLOCKCHAIN para checar as HASHES

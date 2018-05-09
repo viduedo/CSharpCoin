@@ -1,9 +1,9 @@
-﻿// Exemplo de leitura de vários dados em um DB
+﻿// Exemplo de leitura de vários dados em um DB (column = coluna)
 
 CoinDatabaseDAO db = new CoinDatabaseDAO();
 
 for(int i=1; i<= db.GetRowCountBlockchainSQL(); i++)
             {
-                String[] recipiente = db.ReadFromBlockchainSQL(i);
-                Debug.WriteLine(recipiente[0] + ": " + recipiente[1] + ", " + recipiente[2]);
+                String[] column = db.ReadFromBlockchainSQL(i);
+                Debug.WriteLine(column[0] + ": " + column[1] + ", " + column[2]);
             }

@@ -110,7 +110,8 @@ namespace CSharpCoin
 
         private void mnuItemOptions_Click(object sender, EventArgs e)
         {
-
+            AppOptionsPopUp popUp = new AppOptionsPopUp();
+            popUp.Show();
         }
 
         private void mnuItemDebug_Click(object sender, EventArgs e)

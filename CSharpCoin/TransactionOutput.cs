@@ -20,7 +20,7 @@ namespace CSharpCoin
         }
 
 
-        // Verifica se a moeda pertence a você
+        // Verifica se a moeda pertence a você (se realmente recebeu o dinheiro)
         public bool isMine(RSAParameters keyParameters)
         {
             String publicKey = StringUtil.GetStringFromPublicKey(keyParameters);

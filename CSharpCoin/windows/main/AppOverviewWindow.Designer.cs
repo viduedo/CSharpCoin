@@ -80,7 +80,7 @@
             // 
             this.lblBalanceLineBottom.AutoSize = true;
             this.lblBalanceLineBottom.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBalanceLineBottom.Location = new System.Drawing.Point(3, 174);
+            this.lblBalanceLineBottom.Location = new System.Drawing.Point(3, 126);
             this.lblBalanceLineBottom.Name = "lblBalanceLineBottom";
             this.lblBalanceLineBottom.Size = new System.Drawing.Size(383, 17);
             this.lblBalanceLineBottom.TabIndex = 6;
@@ -90,7 +90,7 @@
             // 
             this.lblWallet.AutoSize = true;
             this.lblWallet.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWallet.Location = new System.Drawing.Point(167, 63);
+            this.lblWallet.Location = new System.Drawing.Point(167, 15);
             this.lblWallet.Name = "lblWallet";
             this.lblWallet.Size = new System.Drawing.Size(47, 17);
             this.lblWallet.TabIndex = 0;
@@ -100,7 +100,7 @@
             // 
             this.lblUnconfirmed.AutoSize = true;
             this.lblUnconfirmed.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnconfirmed.Location = new System.Drawing.Point(119, 148);
+            this.lblUnconfirmed.Location = new System.Drawing.Point(119, 100);
             this.lblUnconfirmed.Name = "lblUnconfirmed";
             this.lblUnconfirmed.Size = new System.Drawing.Size(15, 17);
             this.lblUnconfirmed.TabIndex = 4;
@@ -110,7 +110,7 @@
             // 
             this.lblBalance.AutoSize = true;
             this.lblBalance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBalance.Location = new System.Drawing.Point(119, 121);
+            this.lblBalance.Location = new System.Drawing.Point(119, 73);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(15, 17);
             this.lblBalance.TabIndex = 3;
@@ -120,7 +120,7 @@
             // 
             this.lbl2.AutoSize = true;
             this.lbl2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl2.Location = new System.Drawing.Point(30, 148);
+            this.lbl2.Location = new System.Drawing.Point(30, 100);
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(86, 17);
             this.lbl2.TabIndex = 2;
@@ -130,7 +130,7 @@
             // 
             this.lbl1.AutoSize = true;
             this.lbl1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl1.Location = new System.Drawing.Point(30, 121);
+            this.lbl1.Location = new System.Drawing.Point(30, 73);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(55, 17);
             this.lbl1.TabIndex = 1;
@@ -140,7 +140,7 @@
             // 
             this.lblBalanceLineTop.AutoSize = true;
             this.lblBalanceLineTop.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBalanceLineTop.Location = new System.Drawing.Point(3, 80);
+            this.lblBalanceLineTop.Location = new System.Drawing.Point(3, 32);
             this.lblBalanceLineTop.Name = "lblBalanceLineTop";
             this.lblBalanceLineTop.Size = new System.Drawing.Size(383, 17);
             this.lblBalanceLineTop.TabIndex = 5;
@@ -159,7 +159,7 @@
             // 
             this.lblTransactionsLineTop.AutoSize = true;
             this.lblTransactionsLineTop.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransactionsLineTop.Location = new System.Drawing.Point(8, 80);
+            this.lblTransactionsLineTop.Location = new System.Drawing.Point(8, 32);
             this.lblTransactionsLineTop.Name = "lblTransactionsLineTop";
             this.lblTransactionsLineTop.Size = new System.Drawing.Size(383, 17);
             this.lblTransactionsLineTop.TabIndex = 6;
@@ -169,7 +169,7 @@
             // 
             this.lblRecentTransactions.AutoSize = true;
             this.lblRecentTransactions.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRecentTransactions.Location = new System.Drawing.Point(138, 63);
+            this.lblRecentTransactions.Location = new System.Drawing.Point(138, 15);
             this.lblRecentTransactions.Name = "lblRecentTransactions";
             this.lblRecentTransactions.Size = new System.Drawing.Size(130, 17);
             this.lblRecentTransactions.TabIndex = 0;
@@ -215,9 +215,9 @@
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Label lblRecentTransactions;
         private System.Windows.Forms.Label lblUnconfirmed;
-        private System.Windows.Forms.Label lblBalance;
         private System.Windows.Forms.Label lblBalanceLineBottom;
         private System.Windows.Forms.Label lblBalanceLineTop;
         private System.Windows.Forms.Label lblTransactionsLineTop;
+        public System.Windows.Forms.Label lblBalance;
     }
 }

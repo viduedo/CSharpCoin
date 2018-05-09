@@ -111,6 +111,12 @@
     <Compile Include="Wallet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="windows\main\AppOptionsPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="windows\main\AppOptionsPopUp.Designer.cs">
+      <DependentUpon>AppOptionsPopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="windows\main\AppOverviewWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="windows\main\AppOptionsPopUp.resx">
+      <DependentUpon>AppOptionsPopUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="windows\main\AppOverviewWindow.resx">
       <DependentUpon>AppOverviewWindow.cs</DependentUpon>

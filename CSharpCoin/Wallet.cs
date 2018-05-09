@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpCoin.db;
+using CSharpCoin.windows.main;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,13 +24,28 @@ namespace CSharpCoin
         public Wallet()
         {
             GenerateKeyPair(); // Constrói o par de chaves.
+            IsWalletCreated();
         }
+
+        // Verifica se não existe wallets no banco de dados, utilizando a contagem de linhas
+        private void IsWalletCreated()
+        {
+            CoinDatabaseDAO db = new CoinDatabaseDAO();
+
+            if(!db.DataExistsWalletSQL()) // Se não existir dados de carteiras no banco de dados... (! = SE 'NÃO' FOR VERDADEIRO)
+            {
+                // Escreva no banco de dados os dados da carteira instanciada.
+                db.WriteToWalletSQL(StringUtil.GetStringFromPublicKey(keyParameters), StringUtil.GetStringFromPrivateKey(keyParameters), GetBalance());
+            }
+            
+        }
+
 
         // Gera um par de chaves pública/privada
         private void GenerateKeyPair()
         {
             // Create a new RSACryptoServiceProvider object.
-            var rsa = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
             privateKey = rsa.ToXmlString(true); // Gera a chave privada
             publicKey = rsa.ToXmlString(false); // Gera a chave pública
 
@@ -89,7 +106,7 @@ namespace CSharpCoin
         }
 
         // Adiciona uma CHAVE com valores ou Atualiza os valores de uma CHAVE de um Dictionary 
-        public void AddOrUpdateUTXOs(string key, TransactionOutput value)
+        public void AddOrUpdateUTXOs(String key, TransactionOutput value)
         {
             if (UTXOs.ContainsKey(key))
             {
